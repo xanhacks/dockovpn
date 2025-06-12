@@ -1,10 +1,6 @@
 #!/bin/bash
 source ./functions.sh
 
-if [[ -n $DEPLOY_EXPOSED_PORTS ]]; then
-    export HOST_TUN_PORT=$(echo "$DEPLOY_EXPOSED_PORTS" | grep -oP '1194/udp->\K[0-9]+')
-fi
-
 SHORT=rnqs
 LONG="regenerate,noop,quit,skip"
 OPTS=$(getopt -a -n dockovpn --options $SHORT --longoptions $LONG -- "$@")

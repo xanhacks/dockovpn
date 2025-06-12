@@ -29,6 +29,9 @@ function createConfig() {
     cp config/client.ovpn $CLIENT_PATH
     sed -i 's/%HOST_TUN_PROTOCOL%/'"$HOST_TUN_PROTOCOL"'/g' $CLIENT_PATH/client.ovpn
 
+    if [[ -n $DEPLOY_EXPOSED_PORTS ]]; then
+        HOST_TUN_PORT=$(echo "$DEPLOY_EXPOSED_PORTS" | sed -n 's/.*1194\/udp->\([0-9]\+\).*/\1/p')
+    fi
     echo -e "\nremote $HOST_ADDR_INT $HOST_TUN_PORT" >> "$CLIENT_PATH/client.ovpn"
 
     # Embed client authentication files into config file
