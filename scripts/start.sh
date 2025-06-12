@@ -140,5 +140,5 @@ if ! [[ -n $NOOP ]]; then
 fi
 
 if ! [[ -n $QUIT ]]; then
-    tail -f /dev/null
+    nginx -g 'daemon off;'
 fi
